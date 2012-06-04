@@ -35,13 +35,16 @@ function renderAttributes(attributes){
 // Render Tag
 function renderTag(asset, env, stats, attributes) {
   var mimeType = mime.lookup(asset)
-  , timestamp = '?v=' + new Date().getTime();
+    , timestamp;
   attributes = attributes || {};
-  asset = escape(asset) + timestamp;
   if(env === 'production' && typeof stats !== 'undefined') {
     //timestamp = Date.parse(stats.mtime);
     timestamp = '';
   }
+  else{
+    timestamp = '?v=' + new Date().getTime();
+  }
+  asset = escape(asset) + timestamp;
   switch(mimeType) {
     case 'application/javascript':
     case 'text/javascript':
